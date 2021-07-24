@@ -1,0 +1,24 @@
+body {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   height: 100vh;
+}
+
+.container {
+   position: relative;
+   width: 500px;
+   height: 500px;
+   margin: 0 auto;
+   background-color: rgb(238, 213, 213);
+}
+
+.square-1 {
+   position: absolute;
+   left: 0;
+   top: 0;
+   height: 40px;
+   width: 40px;
+   background: tomato;
+}
