@@ -1,24 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: white;
+}
+
 body {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   height: 100vh;
+  font-family: 'Helvetica Neue', sans-serif;
+  margin: 25px;
 }
 
-.container {
-   position: relative;
-   width: 500px;
-   height: 500px;
-   margin: 0 auto;
-   background-color: rgb(238, 213, 213);
+.calculator {
+  border-radius: 50px;
+  padding: 20px;
+  width: 570px;
+  height: 1220px;
+  background: rgb(0, 0, 0);
 }
 
-.square-1 {
-   position: absolute;
-   left: 0;
-   top: 0;
-   height: 40px;
-   width: 40px;
-   background: tomato;
+.calculator-top {
+  padding: 0 20px;
 }
