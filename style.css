@@ -4,6 +4,13 @@
   box-sizing: border-box;
 }
 
+button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  color: white;
+}
+
 body {
   font-family: 'Helvetica Neue', sans-serif;
   margin: 25px;
@@ -27,7 +34,7 @@ body {
   user-select: none;
 }
 
-.value {
+.display {
   margin-bottom: 20px;
   margin-right: 20px;
   height: 158px;
@@ -64,7 +71,8 @@ body {
   background-color: #a5a5a5;
 }
 
-.button__operator {
+.button__operator,
+.button__equal {
   background-color: #f1a33c;
 }
 
