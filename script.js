@@ -1,44 +1,5 @@
 'use strict';
 
-//functions of calculator
-// const acEl = document.querySelector('#ac');
-// const pmEl = document.querySelector('#pm');
-// const percentEl = document.querySelector('#percent');
-
-// //operators of calculator
-// const divisionEl = document.querySelector('#division');
-// const multiEl = document.querySelector('#multi');
-// const minusEl = document.querySelector('#minus');
-// const plusEl = document.querySelector('#plus');
-// const equalEl = document.querySelector('#equal');
-
-// //numbers of calculator
-// const sevenEl = document.querySelector('#seven');
-// const eightEl = document.querySelector('#eight');
-// const nineEl = document.querySelector('#nine');
-// const fourEl = document.querySelector('#four');
-// const fiveEl = document.querySelector('#five');
-// const sixEl = document.querySelector('#six');
-// const oneEl = document.querySelector('#one');
-// const twoEl = document.querySelector('#two');
-// const threeEl = document.querySelector('#three');
-// const zeroEl = document.querySelector('#zero');
-// const dotEl = document.querySelector('#dot');
-
-// // Addeventlistener on Numbers
-// const numberElArray = [
-//   zeroEl,
-//   oneEl,
-//   twoEl,
-//   threeEl,
-//   fourEl,
-//   fiveEl,
-//   sixEl,
-//   sevenEl,
-//   eightEl,
-//   nineEl,
-// ];
-
 const calculator = document.querySelector('.calculator');
 const display = calculator.querySelector('.display');
 const buttonsContainer = calculator.querySelector('.buttons-container');
@@ -81,15 +42,42 @@ buttonsContainer.addEventListener('click', event => {
   // If this an Equal key?
   // We need to numbers First and second to get some math operations FirstNumber * SecondNumber and etc.
   if (type == 'equal') {
-    const secondNumber = displayValue;
     const firstNumber = calculator.dataset.firstNumber;
+    const secondNumber = displayValue;
     const operator = calculator.dataset.operator;
-    console.log(firstNumber, secondNumber, operator);
+
+    display.textContent = calculate(firstNumber, operator, secondNumber);
+  }
+
+  if (type == 'percent') {
+    const secondNumber = parseInt(displayValue);
+    display.textContent = secondNumber / 100;
+  }
+
+  if (type === 'decimal') {
+    console.log(type);
+    if (!displayValue.includes('.')) {
+      display.textContent = displayValue + '.';
+    } else if (previousKeyType === 'operator' || previousKeyType === 'equal') {
+      display.textContent = '0.';
+    }
+    calculator.dataset.previousKeyType = 'decimal';
   }
 
   calculator.dataset.previousKeyType = type;
   // Refresh dataset.previousKeyType after every operation
 });
+
+function calculate(firstNumber, operator, secondNumber) {
+  firstNumber = parseInt(firstNumber);
+  secondNumber = parseInt(secondNumber);
+  let result = '';
+  if (operator == 'plus') result = firstNumber + secondNumber;
+  if (operator == 'minus') result = firstNumber - secondNumber;
+  if (operator == 'multi') result = firstNumber * secondNumber;
+  if (operator == 'divide') result = firstNumber / secondNumber;
+  return result;
+}
 
 // Set up the time
 
