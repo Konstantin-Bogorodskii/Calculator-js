@@ -7,17 +7,22 @@ const buttonsContainer = calculator.querySelector('.buttons-container');
 function calculate(firstNumber, operator, secondNumber) {
   firstNumber = parseFloat(firstNumber);
   secondNumber = parseFloat(secondNumber);
-  console.log(secondNumber);
   let result = '';
   if (operator == 'plus') result = firstNumber + secondNumber;
   if (operator == 'minus') result = firstNumber - secondNumber;
   if (operator == 'multi') result = firstNumber * secondNumber;
   if (operator == 'divide' && secondNumber != 0) result = firstNumber / secondNumber;
-  if (operator == 'percent') result = firstNumber / 100;
-
-  return Math.round((result + Number.EPSILON) * 100) / 100;
+  console.log(result);
+  if (result < 0.1) {
+    return result
+      .toFixed(6)
+      .replace(/([0-9]+(\.[0-9]+[1-9])?)(\.?0+$)/, '$1')
+      .replace(/0*$/, '');
+  } else {
+    return Math.round((result + Number.EPSILON) * 100) / 100;
+  }
 }
-
+// .substring(0, 7)
 // Add Deligation event on buttons wrap.
 buttonsContainer.addEventListener('click', event => {
   let key = event.target;
@@ -36,7 +41,7 @@ buttonsContainer.addEventListener('click', event => {
     console.log(previousKeyType);
     if (displayValue == '0') {
       display.textContent = keyValue;
-    } else if (previousKeyType == 'operator') {
+    } else if (previousKeyType == 'operator' || previousKeyType == 'percent') {
       display.textContent = keyValue;
     } else if (previousKeyType == 'operator' && displayValue !== '0') {
       display.textContent = displayValue + keyValue;
@@ -59,13 +64,7 @@ buttonsContainer.addEventListener('click', event => {
       calculator.dataset.firstValue = displayValue;
       console.log(previousKeyType);
     }
-    // if (previousKeyType === 'number') {
-    //   let firstNumber = display.textContent;
-    //   const secondNumber = displayValue;
-    //   const operator = calculator.dataset.operator;
-    //   display.textContent = calculate(firstNumber, operator, secondNumber);
-    //   console.log('asdasd');
-    // }
+
     calculator.dataset.firstNumber = displayValue;
     key.dataset.state = 'selected';
     calculator.dataset.operator = key.dataset.key;
@@ -86,9 +85,17 @@ buttonsContainer.addEventListener('click', event => {
   }
 
   if (type == 'percent') {
-    if (previousKeyType === 'equal' || previousKeyType === 'number') {
-      const secondNumber = parseInt(displayValue);
-      display.textContent = secondNumber / 100;
+    const secondNumber = parseInt(displayValue);
+    if (
+      previousKeyType === 'equal' ||
+      previousKeyType === 'number' ||
+      previousKeyType === 'change'
+    ) {
+      if (displayValue >= 1 || displayValue <= 1) {
+        display.textContent = displayValue / 100;
+      } else {
+        display.textContent = '0.00' + displayValue.slice(2);
+      }
     }
     console.log(previousKeyType);
   }
@@ -121,7 +128,7 @@ buttonsContainer.addEventListener('click', event => {
       display.textContent = displayValue.slice(1);
     }
   }
-
+  console.log(displayValue);
   calculator.dataset.previousKeyType = type;
   // Refresh dataset.previousKeyType after every operation
 });
