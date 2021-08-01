@@ -19,9 +19,10 @@ function calculate(firstNumber, operator, secondNumber) {
       .replace(/([0-9]+(\.[0-9]+[1-9])?)(\.?0+$)/, '$1')
       .replace(/0*$/, '');
   } else {
-    return Math.round((result + Number.EPSILON) * 100) / 100;
+    return result;
   }
 }
+
 // .substring(0, 7)
 // Add Deligation event on buttons wrap.
 buttonsContainer.addEventListener('click', event => {
@@ -85,7 +86,6 @@ buttonsContainer.addEventListener('click', event => {
   }
 
   if (type == 'percent') {
-    const secondNumber = parseInt(displayValue);
     if (
       previousKeyType === 'equal' ||
       previousKeyType === 'number' ||
@@ -111,12 +111,11 @@ buttonsContainer.addEventListener('click', event => {
   if (type === 'decimal') {
     if (!displayValue.includes('.')) {
       display.textContent = displayValue + '.';
-    } else if (
-      previousKeyType === 'operator' ||
-      previousKeyType === 'equal' ||
-      previousKeyType === 'percent'
-    ) {
+    } else if (previousKeyType === 'operator' || previousKeyType === 'percent') {
       display.textContent = '0.';
+    }
+    if (previousKeyType === 'equal') {
+      display.textContent = '';
     }
     console.log(previousKeyType);
   }
@@ -128,7 +127,7 @@ buttonsContainer.addEventListener('click', event => {
       display.textContent = displayValue.slice(1);
     }
   }
-  console.log(displayValue);
+
   calculator.dataset.previousKeyType = type;
   // Refresh dataset.previousKeyType after every operation
 });

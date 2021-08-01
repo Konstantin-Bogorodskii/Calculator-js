@@ -36,12 +36,13 @@ body {
 }
 
 .display {
-  margin-bottom: 20px;
-  margin-right: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin: 0 20px 20px;
   height: 158px;
-  font-size: 130px;
+  font-size: 120px;
   font-weight: 300;
-  text-align: right;
 }
 .buttons-container {
   display: grid;
