@@ -12,18 +12,21 @@ function calculate(firstNumber, operator, secondNumber) {
   if (operator == 'minus') result = firstNumber - secondNumber;
   if (operator == 'multi') result = firstNumber * secondNumber;
   if (operator == 'divide' && secondNumber != 0) result = firstNumber / secondNumber;
-  console.log(result);
+  console.log(String(result).length);
+
   if (result < 0.1) {
     return result
       .toFixed(6)
       .replace(/([0-9]+(\.[0-9]+[1-9])?)(\.?0+$)/, '$1')
       .replace(/0*$/, '');
-  } else {
+  } // else if (String(result).length > 7) {
+  //   // let res = result.toString(2);
+  //   // return parseInt(res, 10);}
+  else {
     return result;
   }
 }
-
-// .substring(0, 7)
+// 7
 // Add Deligation event on buttons wrap.
 buttonsContainer.addEventListener('click', event => {
   let key = event.target;
@@ -36,25 +39,47 @@ buttonsContainer.addEventListener('click', event => {
 
   let keyValue = key.textContent;
   const displayValue = display.textContent;
+  if (displayValue.length < 7 || previousKeyType == 'operator') {
+    if (type == 'number') {
+      console.log(previousKeyType);
 
-  // If this a Number key?
-  if (type == 'number') {
-    console.log(previousKeyType);
-    if (displayValue == '0') {
-      display.textContent = keyValue;
-    } else if (previousKeyType == 'operator' || previousKeyType == 'percent') {
-      display.textContent = keyValue;
-    } else if (previousKeyType == 'operator' && displayValue !== '0') {
-      display.textContent = displayValue + keyValue;
-    } else {
-      display.textContent = displayValue + keyValue;
+      if (displayValue == '0') {
+        display.textContent = keyValue;
+      } else if (previousKeyType == 'operator' || previousKeyType == 'percent') {
+        display.textContent = keyValue;
+      } else if (previousKeyType == 'operator' && displayValue !== '0') {
+        display.textContent = displayValue + keyValue;
+      } else {
+        display.textContent = displayValue + keyValue;
+      }
+      if (previousKeyType == 'equal' && displayValue !== '0') {
+        display.textContent = keyValue;
+      }
     }
-    if (previousKeyType == 'equal' && displayValue !== '0') {
-      display.textContent = keyValue;
+
+    // If this an Operator key?
+
+    if (type === 'decimal') {
+      if (!displayValue.includes('.')) {
+        display.textContent = displayValue + '.';
+      } else if (previousKeyType === 'operator' || previousKeyType === 'percent') {
+        display.textContent = '0.';
+      }
+      if (previousKeyType === 'equal') {
+        display.textContent = '';
+      }
+      console.log(previousKeyType);
+    }
+
+    if (type === 'change' && displayValue !== '0') {
+      if (+displayValue > 0) {
+        display.textContent = '-' + displayValue;
+      } else if (+displayValue < 0) {
+        display.textContent = displayValue.slice(1);
+      }
     }
   }
-
-  // If this an Operator key?
+  // If this a Number key?
   if (type == 'operator') {
     const operatorKeys = document.querySelectorAll('[data-type="operator"]');
     operatorKeys.forEach(item => {
@@ -108,26 +133,6 @@ buttonsContainer.addEventListener('click', event => {
     console.log(previousKeyType);
   }
 
-  if (type === 'decimal') {
-    if (!displayValue.includes('.')) {
-      display.textContent = displayValue + '.';
-    } else if (previousKeyType === 'operator' || previousKeyType === 'percent') {
-      display.textContent = '0.';
-    }
-    if (previousKeyType === 'equal') {
-      display.textContent = '';
-    }
-    console.log(previousKeyType);
-  }
-
-  if (type === 'change' && displayValue !== '0') {
-    if (+displayValue > 0) {
-      display.textContent = '-' + displayValue;
-    } else if (+displayValue < 0) {
-      display.textContent = displayValue.slice(1);
-    }
-  }
-
   calculator.dataset.previousKeyType = type;
   // Refresh dataset.previousKeyType after every operation
 });
@@ -150,3 +155,10 @@ setInterval(updateTime, 1000);
 updateTime();
 // Function is called once after delay per second, so we need new func to update time every time (updateTime)
 // We set all code from setInterval to updateTime and call updateTime in setInteveal every second;
+
+console.log(
+  parseInt(
+    '111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111',
+    2
+  )
+);
