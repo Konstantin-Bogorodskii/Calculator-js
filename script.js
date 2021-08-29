@@ -12,20 +12,40 @@ function calculate(firstNumber, operator, secondNumber) {
   if (operator == 'minus') result = firstNumber - secondNumber;
   if (operator == 'multi') result = firstNumber * secondNumber;
   if (operator == 'divide' && secondNumber != 0) result = firstNumber / secondNumber;
-  console.log(String(result).length);
-
-  if (result < 0.1) {
+  // console.log(String(result).length);
+  console.log(firstNumber, secondNumber, operator);
+  if (result < 0.1 && result != 0) {
+    console.log(result);
     return result
       .toFixed(6)
       .replace(/([0-9]+(\.[0-9]+[1-9])?)(\.?0+$)/, '$1')
       .replace(/0*$/, '');
-  } // else if (String(result).length > 7) {
-  //   // let res = result.toString(2);
-  //   // return parseInt(res, 10);}
-  else {
+  } else if (String(result).length > 7) {
+    console.log('da');
+    return result.toExponential(5).replace(/\+/, '');
+  } else {
     return result;
   }
 }
+
+function converBigNum(value) {
+  if (Math.abs(value) < 1.0) {
+    let e = parseInt(value.toString().split('e-')[1]);
+    if (e) {
+      value *= Math.pow(10, e - 1);
+      value = '0.' + new Array(e).join('0') + value.toString().substring(2);
+    }
+  } else {
+    let e = parseInt(value.toString().split('+')[1]);
+    if (e > 20) {
+      e -= 20;
+      value /= Math.pow(10, e);
+      value += new Array(e + 1).join('0');
+    }
+  }
+  return value;
+}
+console.log(converBigNum(3.08611e10));
 // 7
 // Add Deligation event on buttons wrap.
 buttonsContainer.addEventListener('click', event => {
@@ -155,10 +175,3 @@ setInterval(updateTime, 1000);
 updateTime();
 // Function is called once after delay per second, so we need new func to update time every time (updateTime)
 // We set all code from setInterval to updateTime and call updateTime in setInteveal every second;
-
-console.log(
-  parseInt(
-    '111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111',
-    2
-  )
-);
