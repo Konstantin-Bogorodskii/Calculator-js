@@ -12,41 +12,25 @@ function calculate(firstNumber, operator, secondNumber) {
   if (operator == 'minus') result = firstNumber - secondNumber;
   if (operator == 'multi') result = firstNumber * secondNumber;
   if (operator == 'divide' && secondNumber != 0) result = firstNumber / secondNumber;
-  // console.log(String(result).length);
-  console.log(firstNumber, secondNumber, operator);
   if (result < 0.1 && result != 0) {
-    console.log(result);
+    if (result.toString().length > 12) {
+      return result
+        .toFixed(2)
+        .replace(/([0-9]+(\.[0-9]+[1-9])?)(\.?0+$)/, '$1')
+        .replace(/0*$/, '');
+    }
     return result
       .toFixed(6)
       .replace(/([0-9]+(\.[0-9]+[1-9])?)(\.?0+$)/, '$1')
       .replace(/0*$/, '');
-  } else if (String(result).length > 7) {
-    console.log('da');
-    return result.toExponential(5).replace(/\+/, '');
+  } else if (result > 999999999) {
+    console.log('n2');
+    return result.toExponential(4).replace(/\+/, '');
   } else {
-    return result;
+    return parseFloat(result.toFixed(4));
   }
 }
 
-function converBigNum(value) {
-  if (Math.abs(value) < 1.0) {
-    let e = parseInt(value.toString().split('e-')[1]);
-    if (e) {
-      value *= Math.pow(10, e - 1);
-      value = '0.' + new Array(e).join('0') + value.toString().substring(2);
-    }
-  } else {
-    let e = parseInt(value.toString().split('+')[1]);
-    if (e > 20) {
-      e -= 20;
-      value /= Math.pow(10, e);
-      value += new Array(e + 1).join('0');
-    }
-  }
-  return value;
-}
-console.log(converBigNum(3.08611e10));
-// 7
 // Add Deligation event on buttons wrap.
 buttonsContainer.addEventListener('click', event => {
   let key = event.target;
@@ -59,7 +43,7 @@ buttonsContainer.addEventListener('click', event => {
 
   let keyValue = key.textContent;
   const displayValue = display.textContent;
-  if (displayValue.length < 7 || previousKeyType == 'operator') {
+  if (displayValue.length < 9 || previousKeyType == 'operator' || type === 'change') {
     if (type == 'number') {
       console.log(previousKeyType);
 
