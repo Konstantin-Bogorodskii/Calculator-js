@@ -182,7 +182,10 @@ body {
 @media (max-width: 420px) {
   .calculator {
     width: 35rem;
-    height: 65rem;
+  }
+
+  .calculator__top {
+    height: 35%;
   }
 
   .buttons-container {
