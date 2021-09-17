@@ -8,44 +8,46 @@
     <title>iPhone Calculator</title>
   </head>
   <body>
-    <div class="calculator">
-      <div class="calculator__top">
-        <div class="clock">
-          <span class="clock__hour"></span>:<span class="clock__minute"></span>
+    <div class="calculator__wrap">
+      <div class="calculator">
+        <div class="calculator__top">
+          <div class="clock">
+            <span class="clock__hour"></span>:<span class="clock__minute"></span>
+          </div>
+          <div class="status-bar">
+            <img src="img/status-bar.png" alt="iPhone: status-bar" class="status-bar__img" />
+          </div>
+          <!-- /.status-bar -->
         </div>
-        <div class="status-bar">
-          <img src="img/status-bar.png" alt="iPhone: status-bar" class="status-bar__img" />
+        <!-- /.calculator-top -->
+        <div class="display">0</div>
+        <!-- /.display -->
+        <div class="buttons-container">
+          <button class="button button__func" data-type="clear">AC</button>
+          <button class="button button__func" data-type="change">±</button>
+          <button class="button button__func" data-type="percent">%</button>
+          <button class="button button__operator" data-type="operator" data-key="divide">÷</button>
+          <button class="button" data-type="number">7</button>
+          <button class="button" data-type="number">8</button>
+          <button class="button" data-type="number">9</button>
+          <button class="button button__operator" data-type="operator" data-key="multi">×</button>
+          <button class="button" data-type="number">4</button>
+          <button class="button" data-type="number">5</button>
+          <button class="button" data-type="number">6</button>
+          <button class="button button__operator" data-type="operator" data-key="minus">−</button>
+          <button class="button" data-type="number">1</button>
+          <button class="button" data-type="number">2</button>
+          <button class="button" data-type="number">3</button>
+          <button class="button button__operator" data-type="operator" data-key="plus">+</button>
+          <button class="button" data-type="number" id="zero">0</button>
+          <button class="button" data-type="decimal">.</button>
+          <button class="button button__equal" data-type="equal" id="equal">=</button>
         </div>
-        <!-- /.status-bar -->
+        <!-- /.buttons-container -->
+        <div class="bottom"></div>
       </div>
-      <!-- /.calculator-top -->
-      <div class="display">0</div>
-      <!-- /.display -->
-      <div class="buttons-container">
-        <button class="button button__func" data-type="clear">AC</button>
-        <button class="button button__func" data-type="change">±</button>
-        <button class="button button__func" data-type="percent">%</button>
-        <button class="button button__operator" data-type="operator" data-key="divide">÷</button>
-        <button class="button" data-type="number">7</button>
-        <button class="button" data-type="number">8</button>
-        <button class="button" data-type="number">9</button>
-        <button class="button button__operator" data-type="operator" data-key="multi">×</button>
-        <button class="button" data-type="number">4</button>
-        <button class="button" data-type="number">5</button>
-        <button class="button" data-type="number">6</button>
-        <button class="button button__operator" data-type="operator" data-key="minus">−</button>
-        <button class="button" data-type="number">1</button>
-        <button class="button" data-type="number">2</button>
-        <button class="button" data-type="number">3</button>
-        <button class="button button__operator" data-type="operator" data-key="plus">+</button>
-        <button class="button" data-type="number" id="zero">0</button>
-        <button class="button" data-type="decimal">.</button>
-        <button class="button button__equal" data-type="equal" id="equal">=</button>
-      </div>
-      <!-- /.buttons-container -->
-      <div class="bottom"></div>
+      <!-- /.calculator -->
     </div>
-    <!-- /.calculator -->
     <script src="script.js"></script>
   </body>
 </html>
