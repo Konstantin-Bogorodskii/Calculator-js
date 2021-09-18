@@ -1,8 +1,4 @@
-# iPhone Calculator
-
-## Pet Project
-
--  Проект выполнил: Богородский К.О.
+# iPhone Calculator Pet Project
 
 ##  Technologies in Use
 
