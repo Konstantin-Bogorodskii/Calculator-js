@@ -1,10 +1,6 @@
-# iPhone Calculator
+# iPhone Calculator Pet Project
 
-Учебный проект
-
--  Проект выполнил: Богородский К.О.
-
-## Используются технологии
+##  Technologies in Use
 
 -  HTML
 -  CSS
